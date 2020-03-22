@@ -54,7 +54,7 @@ public class PessoaController {
 		Optional<Pessoa> oldPessoa=pessoaRepository.findById(id);
 		if(oldPessoa.isPresent()) {
 			Pessoa pessoa=oldPessoa.get();
-			pessoa.setNome(newPessoa.getNome());
+			pessoa.setDs_nome(newPessoa.getNome());
 			pessoaRepository.save(pessoa);
 			return new ResponseEntity<Pessoa>(pessoa, HttpStatus.OK);
 		}
