@@ -1,0 +1,40 @@
+version: "2"
+services:
+  db:
+      image: mariadb
+      environment:
+          - MYSQL_ROOT_PASSWORD=wdasilva
+          - MYSQL_DATABASE=bibliotecaDB
+      volumes:
+          - ./database:/var/lib/mysql
+      restart: always
+      ports:
+           - '3306:3306'
+  phpmyadmin:
+      image: phpmyadmin/phpmyadmin:latest
+      environment:
+         - PMA_ARBITRARY=1
+          - PMA_HOST=db
+      restart: always
+      ports:
+          - '80:80'
+      volumes:
+          - /sessions
+      links:
+          - db:db
+#services:    
+#  sql_server_local:
+##     container_name: sql_server_local
+#      image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+##      image: mcr.microsoft.com/mssql/server:2017-latest
+#      environment:
+#        -  ACCEPT_EULA=Y
+#        -  SA_PASSWORD='Wd@silva'
+#        -  MSSQL_PID=Developer
+#        -  TZ=America/Sao_Paulo
+#      ports:
+#          - 1433:1433
+#      volumes:
+#          - ./db:/var/opt/mssql
+#      restart: always
+#      mem_limit: 1024m
